@@ -12,8 +12,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import javafx.scene.control.Alert;
 import models.entities.Config;
 
@@ -57,8 +57,8 @@ public class ArquivoDB {
             }
             
         }else{
-            
-            config = new Config("COM3", 9600, 0, 200f, 200f, 200f, 80f, 60f, 1f);
+            Entry<String, String> entry = new HashMap.SimpleEntry<>("Arduino Uno (COM3)","COM3");
+            config = new Config(entry, 9600, 0, 200f, 200f, 200f, 80f, 60f, 1f);
             
             save(config, path);
             

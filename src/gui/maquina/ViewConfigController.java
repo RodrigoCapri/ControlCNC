@@ -8,9 +8,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,6 +37,9 @@ public class ViewConfigController implements Initializable{
     @FXML
     private ComboBox<String> cbPortasComm;
     private ObservableList<String> obsListPortasComm;
+    
+    @FXML
+    private Label lbPortaCom;
     
     @FXML
     private ComboBox<Integer> cbBaunds;
@@ -71,7 +79,7 @@ public class ViewConfigController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-        Config config = ArquivoDB.load("/config.cfg");
+        Config config = ArquivoDB.load("/config.conf");
         
         //Carrega a lista de baunds no ComboBox
         obsListBaunds = FXCollections.observableArrayList(Arrays.asList(9600, 19200, 31250, 19200, 31250, 38400, 57600, 74880, 115200));
@@ -79,9 +87,15 @@ public class ViewConfigController implements Initializable{
         cbBaunds.setValue(config.getBaunds());
         
         //Carrega a lista de portas comm disponiveis no ComboBox
-        obsListPortasComm = FXCollections.observableArrayList(UsbControl.getListPort());
+        Set<Entry<String, String>> set = UsbControl.getPortasCom();
+        List<String> list = new ArrayList<>();
+        for (Entry<String, String> entry : set) {
+            list.add(entry.getKey());
+        }
+        obsListPortasComm = FXCollections.observableArrayList(list);
         cbPortasComm.setItems(obsListPortasComm);
-        cbPortasComm.setValue(config.getPortaComm());
+        cbPortasComm.setValue(config.getPortaComm().getKey());
+        lbPortaCom.setText(config.getPortaComm().getValue());
         
         //Carrega a lista de modos dos motores no ComboBox
         obsListMotorMode = FXCollections.observableArrayList(Arrays.asList(0, 1, 2, 3));

@@ -5,6 +5,7 @@
 package models.entities;
 
 import java.io.Serializable;
+import java.util.Map.Entry;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.io.Serializable;
  */
 public class Config implements Serializable{
     
-    private String portaComm;
+    private Entry<String,String> portaComm;
     private Integer baunds;
     
     private Integer motorMode;
@@ -28,7 +29,7 @@ public class Config implements Serializable{
     public Config(){
     }
 
-    public Config(String portaComm, Integer baunds, Integer motorMode, Float stepEixoX, Float stepEixoY, Float stepEixoZ, Float servoPosMax, Float servoPosMin, Float servoIncrement) {
+    public Config(Entry<String, String> portaComm, Integer baunds, Integer motorMode, Float stepEixoX, Float stepEixoY, Float stepEixoZ, Float servoPosMax, Float servoPosMin, Float servoIncrement) {
         this.portaComm = portaComm;
         this.baunds = baunds;
         this.motorMode = motorMode;
@@ -40,11 +41,11 @@ public class Config implements Serializable{
         this.servoIncrement = servoIncrement;
     }
 
-    public String getPortaComm() {
+    public Entry<String, String> getPortaComm() {
         return portaComm;
     }
 
-    public void setPortaComm(String portaComm) {
+    public void setPortaComm(Entry<String, String> portaComm) {
         this.portaComm = portaComm;
     }
 

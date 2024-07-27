@@ -89,7 +89,7 @@ public class MainViewController  implements Initializable{
 			Pane pane = loader.load(); // Adiciona o cenario em um Pane
 
 			Stage dialogStage = new Stage(); // Nova cena para aparecer na frente de outra cena
-			dialogStage.setTitle("Enter Seller data"); // Definindo o titulo
+			dialogStage.setTitle("Configurações da máquina"); // Definindo o titulo
 			dialogStage.setScene(new Scene(pane)); // Adiciona o Pane na cena
 			dialogStage.setResizable(false); // Define como não redimensionavel
 			dialogStage.initOwner(parentStage); // Quem é o init pai dessa janela

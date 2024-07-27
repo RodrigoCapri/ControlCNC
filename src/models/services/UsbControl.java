@@ -6,15 +6,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.TooManyListenersException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  *
@@ -143,5 +145,18 @@ public class UsbControl {
         }
         
         return nomes;
+    }
+    
+    public static Set< Entry<String, String> > getPortasCom(){
+        
+        Map<String, String> map = new HashMap<>();
+        
+        SerialPort portas[] = SerialPort.getCommPorts();
+        
+        for(SerialPort porta : portas){
+            map.put(porta.getDescriptivePortName(), porta.getPortDescription());
+        }
+        
+        return map.entrySet();
     }
 }
