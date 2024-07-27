@@ -12,6 +12,9 @@
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </Label>
       <Label text="Arduino Controle CNC">
          <font>

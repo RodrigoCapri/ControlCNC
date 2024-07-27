@@ -4,15 +4,12 @@
  */
 package gui.maquina;
 
+import application.Main;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -79,7 +76,7 @@ public class ViewConfigController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-        Config config = ArquivoDB.load("/config.conf");
+        Config config = ArquivoDB.load(Main.getPahtConfig());
         
         //Carrega a lista de baunds no ComboBox
         obsListBaunds = FXCollections.observableArrayList(Arrays.asList(9600, 19200, 31250, 19200, 31250, 38400, 57600, 74880, 115200));

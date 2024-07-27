@@ -32,6 +32,9 @@ public class MainViewController  implements Initializable{
     @FXML
     private MenuItem menuItemConfig;
     
+    @FXML
+    private MenuItem menuItemIniciar;
+    
     public MainViewController(){
     }
     
@@ -47,6 +50,11 @@ public class MainViewController  implements Initializable{
         
         this.createDialogForm("maquina/ViewConfig.fxml", Main.getParent());
         
+    }
+    
+    @FXML
+    public void onMenuItemIniciarAction(){
+        this.loadView("/gui/iniciar/IniciarView.fxml", x -> {});
     }
     
     @Override

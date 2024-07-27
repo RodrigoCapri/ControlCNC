@@ -18,6 +18,7 @@ public class Main extends Application{
     
     private static Scene mainScene;
     private static Stage stage;
+    private static String pathConfig = "config.conf";
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -49,6 +50,10 @@ public class Main extends Application{
     
     public static Stage getParent(){
         return stage;
+    }
+    
+    public static String getPahtConfig(){
+        return pathConfig;
     }
     
     public static void main(String args[]){
