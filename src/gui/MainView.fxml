@@ -16,7 +16,7 @@
                   <Menu mnemonicParsing="false" text="Máquina">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Iniciar" />
-                        <MenuItem mnemonicParsing="false" text="Configurações" />
+                        <MenuItem fx:id="menuItemConfig" mnemonicParsing="false" onAction="#onMenuItemConfigAction" text="Configurações" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Arquivo">

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
     
     private static Scene mainScene;
+    private static Stage stage;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -34,6 +35,8 @@ public class Main extends Application{
             primaryStage.setTitle("Controle CNC");
             primaryStage.show();
             
+            stage = primaryStage;
+            
         }catch(IOException e){
             Alerts.showAlert("Error", null, e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -42,6 +45,10 @@ public class Main extends Application{
     
     public static Scene getMainScene(){
         return mainScene;
+    }
+    
+    public static Stage getParent(){
+        return stage;
     }
     
     public static void main(String args[]){

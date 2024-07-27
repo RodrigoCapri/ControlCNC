@@ -15,6 +15,8 @@ public class Config implements Serializable{
     private String portaComm;
     private Integer baunds;
     
+    private Integer motorMode;
+    
     private Float stepEixoX;
     private Float stepEixoY;
     private Float stepEixoZ;
@@ -26,9 +28,10 @@ public class Config implements Serializable{
     public Config(){
     }
 
-    public Config(String portaComm, Integer baunds, Float stepEixoX, Float stepEixoY, Float stepEixoZ, Float servoPosMax, Float servoPosMin, Float servoIncrement) {
+    public Config(String portaComm, Integer baunds, Integer motorMode, Float stepEixoX, Float stepEixoY, Float stepEixoZ, Float servoPosMax, Float servoPosMin, Float servoIncrement) {
         this.portaComm = portaComm;
         this.baunds = baunds;
+        this.motorMode = motorMode;
         this.stepEixoX = stepEixoX;
         this.stepEixoY = stepEixoY;
         this.stepEixoZ = stepEixoZ;
@@ -100,6 +103,16 @@ public class Config implements Serializable{
     public void setServoIncrement(Float servoIncrement) {
         this.servoIncrement = servoIncrement;
     }
+
+    public Integer getMotorMode() {
+        return motorMode;
+    }
+
+    public void setMotorMode(Integer motorMode) {
+        this.motorMode = motorMode;
+    }
+    
+    
 
     @Override
     public String toString() {

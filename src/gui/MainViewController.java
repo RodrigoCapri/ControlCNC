@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package gui;
 
 import application.Main;
@@ -18,8 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -30,6 +29,8 @@ public class MainViewController  implements Initializable{
     @FXML
     private MenuItem menuItemSobre;
     
+    @FXML
+    private MenuItem menuItemConfig;
     
     public MainViewController(){
     }
@@ -38,6 +39,13 @@ public class MainViewController  implements Initializable{
     public void onMenuItemSobreAction(){
         
         this.loadView("/gui/sobre/Sobre.fxml", x -> {});
+        
+    }
+    
+    @FXML
+    public void onMenuItemConfigAction(javafx.event.ActionEvent event){
+        
+        this.createDialogForm("maquina/ViewConfig.fxml", Main.getParent());
         
     }
     
@@ -71,6 +79,28 @@ public class MainViewController  implements Initializable{
 			Alerts.showAlert("IO Exception", "Error loading view!", e.getMessage(), AlertType.ERROR);
 		}
 		
+	}
+    
+    private void createDialogForm(String absoluteName, Stage parentStage) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource(absoluteName)); // Carrega o cenário da fxml
+																							// informada
+			Pane pane = loader.load(); // Adiciona o cenario em um Pane
+
+			Stage dialogStage = new Stage(); // Nova cena para aparecer na frente de outra cena
+			dialogStage.setTitle("Enter Seller data"); // Definindo o titulo
+			dialogStage.setScene(new Scene(pane)); // Adiciona o Pane na cena
+			dialogStage.setResizable(false); // Define como não redimensionavel
+			dialogStage.initOwner(parentStage); // Quem é o init pai dessa janela
+			// Modality.WINDOW_MODAL -> Enquando você não fechar essa janela, não poderá
+			// mexer na tela anterior
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.showAndWait(); // Mostra a tela enquanto aguarda
+
+		} catch (IOException ex) {
+			Alerts.showAlert("IO EXception", "Error load view!", ex.getMessage(), AlertType.ERROR);
+		}
 	}
     
 }

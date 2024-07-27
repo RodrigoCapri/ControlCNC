@@ -58,7 +58,7 @@ public class ArquivoDB {
             
         }else{
             
-            config = new Config("COM3", 9600, 200f, 200f, 200f, 80f, 60f, 1f);
+            config = new Config("COM3", 9600, 0, 200f, 200f, 200f, 80f, 60f, 1f);
             
             save(config, path);
             
