@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
+<ScrollPane prefHeight="900.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
    <content>
       <VBox prefHeight="700.0" prefWidth="900.0">
          <children>
@@ -21,8 +21,8 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Arquivo">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Abrir" />
-                        <MenuItem mnemonicParsing="false" text="Fechar" />
+                        <MenuItem fx:id="menuItemAbrir" mnemonicParsing="false" onAction="#onMenuItemAbrirAction" text="Abrir" />
+                        <MenuItem fx:id="menuItemFechar" mnemonicParsing="false" onAction="#onMenuItemFecharAction" text="Fechar" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Ajuda">

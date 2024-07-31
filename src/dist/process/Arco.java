@@ -1,17 +1,25 @@
 package dist.process;
 
+import javafx.scene.paint.Color;
+
 public class Arco {
 	
     public static final int HORARIO = 1;
     public static final int ANTI_HORARIO = 0;
-    private static final double CONST = 0.002;
+    private static final double CONST = 0.01; //0.002
     
     public static void drawArc(double x, double y, double i, double j, int dir) {
         
-        double pontoA[] = { AtualPoint.x, AtualPoint.y }; //Inicio do arco
+        System.out.println("-> x: "+x+", y: "+y+" - i: "+i+", j: "+j);
+        
+        double pontoA[] = { AtualPoint.getX(), AtualPoint.getY() }; //Inicio do arco
         double pontoB[] = { x, y }; //Final do arco
-        double pontoC[] = { (AtualPoint.x+i), (AtualPoint.y+j) }; //Centro do arco
+        double pontoC[] = { (AtualPoint.getX()+i), (AtualPoint.getY()+j) }; //Centro do arco
 
+        System.out.println("Ponto A: "+pontoA[0]+", "+pontoA[1]);
+        System.out.println("Ponto B: "+pontoB[0]+", "+pontoB[1]);
+        System.out.println("Ponto C: "+pontoC[0]+", "+pontoC[1]);
+        
         //O raio é dado pela distancia do ponto A ao C
         double vetor[] = {
             (pontoC[0]-pontoA[0]),
@@ -35,7 +43,7 @@ public class Arco {
                     while(gInit >= gEnd){
 
                         double[] p = Arco.toCoordenada(gInit, raio, pontoC);
-                        Reta.drawRetaG2( p[0] , p[1] );
+                        Reta.drawReta( p[0] , p[1], 0.5, Color.MAGENTA );
                         gInit -= Arco.CONST;
                         
                     }
@@ -46,12 +54,13 @@ public class Arco {
                     if ( gInit >= gEnd ){
                         gEnd += 360;
                     }
-
+                    
                     while(gInit < gEnd){
 
                         double[] p = Arco.toCoordenada(gInit, raio, pontoC);
-                        Reta.drawRetaG3( p[0] , p[1] );
+                        Reta.drawReta( p[0] , p[1], 0.5, Color.YELLOW );
                         gInit += Arco.CONST;
+                        
                     }
                     
                 break;
@@ -59,7 +68,7 @@ public class Arco {
         }
         //Desenha mais uma reta até o ponto final do comando
         //para garantir a precisão do movimento
-        Reta.drawReta(x, y);
+        AtualPoint.setPontoAtual(x, y);
     }
     
     //Pega o grau da coordenada usando a conversão de coordenadas

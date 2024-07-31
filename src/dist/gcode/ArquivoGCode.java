@@ -5,14 +5,15 @@
  */
 package dist.gcode;
 
+import application.Main;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javafx.stage.FileChooser;
 
 /**
  *
@@ -22,19 +23,18 @@ public class ArquivoGCode {
     
     private static ArrayList<String> linhas_comando = null;
     private static int num_linhas= 0;
-    private static String path_file = null;
+    private static File path_file = null;
     
     //Aqui permite abrir um gcode com uma caixa de dialogo ja pronta
     public static String openFile(){
         
-        JFileChooser file_chooser= new JFileChooser();
-        file_chooser.setFileFilter(new FileNameExtensionFilter("Arquivos de comandos .nc", "nc"));
-        file_chooser.setAcceptAllFileFilterUsed(false);
-        int result= file_chooser.showOpenDialog(null);
+        FileChooser file_chooser = new FileChooser();
+        file_chooser.setTitle("Abrir arquivo...");
+        file_chooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Arquivos gcode *.nc", "nc"));
+        path_file = file_chooser.showOpenDialog(Main.getParent());
         
-        if(result == JFileChooser.APPROVE_OPTION){
+        if(path_file != null){
             
-            path_file = file_chooser.getSelectedFile().getPath();
             linhas_comando= new ArrayList<>();
             
             try (BufferedReader buf_reader = new BufferedReader(new FileReader(path_file))) {
@@ -51,7 +51,7 @@ public class ArquivoGCode {
             } catch (IOException ex) {
                 Logger.getLogger(ArquivoGCode.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return path_file;
+            return path_file.getAbsolutePath();
             
         }else{
             return null;
@@ -61,7 +61,7 @@ public class ArquivoGCode {
     public static void openFile(String path){
         linhas_comando= new ArrayList<>();
 
-        path_file = path;
+        path_file = new File(path);
         
         try (BufferedReader buf_reader = new BufferedReader(new FileReader(path_file))) {
             while(true){
@@ -165,7 +165,7 @@ public class ArquivoGCode {
     }
     
     public static String getPathFile(){
-        return path_file;
+        return path_file.getAbsolutePath();
     }
     
     public static String getLinhaComando(int i){

@@ -5,8 +5,8 @@
  */
 package dist.process;
 
-import java.awt.Color;
-import java.awt.geom.Line2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -14,59 +14,22 @@ import java.awt.geom.Line2D;
  */
 public class Reta extends AtualPoint{
     
-    public static void drawReta(double x, double y){
-        AtualPoint.g2d.setColor(Color.GREEN);
-        double compense_x= AtualPoint.panel.getWidth() / 2;
-        double compense_y= AtualPoint.panel.getHeight() / 2;
+    public static void drawReta(double x, double y, double large, Color cor){
+        GraphicsContext gc = getGc();
         
-        double a = ( (AtualPoint.x*AtualPoint.getFatorMultiplicador()) +compense_x );
-        double b = ( ( (AtualPoint.y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
+        double compense_x= getCanvas().getWidth() / 2;
+        double compense_y= getCanvas().getHeight() / 2;
+        
+        double a = ( (AtualPoint.getX()*AtualPoint.getFatorMultiplicador()) +compense_x );
+        double b = ( ( (AtualPoint.getY()*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
         double a2 = ( (x*AtualPoint.getFatorMultiplicador()) +compense_x );
         double b2 = ( ( (y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
         
-        AtualPoint.g2d.draw(new Line2D.Double( a, b, a2, b2) );
-        AtualPoint.setPontoAtual(x, y);
-    }
-    
-    public static void drawReta2(double x, double y){
-        AtualPoint.g2d.setColor(Color.CYAN);
-        double compense_x= AtualPoint.panel.getWidth() / 2;
-        double compense_y= AtualPoint.panel.getHeight() / 2;
+        gc.setStroke(cor);
+        gc.setLineWidth(large);
+        gc.strokeLine(a, b, a2, b2);
         
-        double a = ( (AtualPoint.x*AtualPoint.getFatorMultiplicador()) +compense_x );
-        double b = ( ( (AtualPoint.y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
-        double a2 = ( (x*AtualPoint.getFatorMultiplicador()) +compense_x );
-        double b2 = ( ( (y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
+        setPontoAtual(x, y);
         
-        AtualPoint.g2d.draw(new Line2D.Double( a, b, a2, b2) );
-        AtualPoint.setPontoAtual(x, y);
-    }
-    
-    public static void drawRetaG2(double x, double y){
-        AtualPoint.g2d.setColor(Color.orange);
-        double compense_x= AtualPoint.panel.getWidth() / 2;
-        double compense_y= AtualPoint.panel.getHeight() / 2;
-        
-        double a = ( (AtualPoint.x*AtualPoint.getFatorMultiplicador()) +compense_x );
-        double b = ( ( (AtualPoint.y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
-        double a2 = ( (x*AtualPoint.getFatorMultiplicador()) +compense_x );
-        double b2 = ( ( (y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
-        
-        AtualPoint.g2d.draw(new Line2D.Double( a, b, a2, b2) );
-        AtualPoint.setPontoAtual(x, y);
-    }
-    
-    public static void drawRetaG3(double x, double y){
-        AtualPoint.g2d.setColor(Color.LIGHT_GRAY);
-        double compense_x= AtualPoint.panel.getWidth() / 2;
-        double compense_y= AtualPoint.panel.getHeight() / 2;
-        
-        double a = ( (AtualPoint.x*AtualPoint.getFatorMultiplicador()) +compense_x );
-        double b = ( ( (AtualPoint.y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
-        double a2 = ( (x*AtualPoint.getFatorMultiplicador()) +compense_x );
-        double b2 = ( ( (y*AtualPoint.getFatorMultiplicador()) *-1)+compense_y );
-        
-        AtualPoint.g2d.draw(new Line2D.Double( a, b, a2, b2) );
-        AtualPoint.setPontoAtual(x, y);
     }
 }

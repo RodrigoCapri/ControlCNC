@@ -5,8 +5,8 @@
  */
 package dist.process;
 
-import java.awt.Graphics2D;
-import javax.swing.JPanel;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
@@ -14,15 +14,35 @@ import javax.swing.JPanel;
  */
 public class AtualPoint {
     
-    static double x= 0; //ponto atual
-    static double y= 0; //ponto atual
-    static Graphics2D g2d;
-    static JPanel panel;
-    static double fator_multiplicador = 1;
+    private static double x; //ponto atual
+    private static double y; //ponto atual
+    private static double fator_multiplicador = 1;
     
-    public static void setGraphics(Graphics2D g2d, JPanel panel){
-        AtualPoint.g2d= g2d;
-        AtualPoint.panel= panel;
+    private static GraphicsContext gc;
+    private static Canvas canvas;
+
+    public static double getFator_multiplicador() {
+        return fator_multiplicador;
+    }
+
+    public static void setFator_multiplicador(double fator_multiplicador) {
+        AtualPoint.fator_multiplicador = fator_multiplicador;
+    }
+
+    public static GraphicsContext getGc() {
+        return gc;
+    }
+
+    public static void setGc(GraphicsContext gc) {
+        AtualPoint.gc = gc;
+    }
+
+    public static Canvas getCanvas() {
+        return canvas;
+    }
+
+    public static void setCanvas(Canvas canvas) {
+        AtualPoint.canvas = canvas;
     }
     
     public static void setFatorMultiplicador(double valor){
@@ -46,14 +66,6 @@ public class AtualPoint {
     public static void to_string(){
         String str= "=> "+AtualPoint.x+" , "+AtualPoint.y;
         System.out.println(str);
-    }
-    
-    public static Graphics2D getGraphics2D(){
-        return AtualPoint.g2d;
-    }
-    
-    public static JPanel getPanel(){
-        return AtualPoint.panel;
     }
     
     public static double getX(){
