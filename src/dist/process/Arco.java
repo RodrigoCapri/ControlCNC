@@ -10,15 +10,9 @@ public class Arco {
     
     public static void drawArc(double x, double y, double i, double j, int dir) {
         
-        System.out.println("-> x: "+x+", y: "+y+" - i: "+i+", j: "+j);
-        
         double pontoA[] = { AtualPoint.getX(), AtualPoint.getY() }; //Inicio do arco
         double pontoB[] = { x, y }; //Final do arco
         double pontoC[] = { (AtualPoint.getX()+i), (AtualPoint.getY()+j) }; //Centro do arco
-
-        System.out.println("Ponto A: "+pontoA[0]+", "+pontoA[1]);
-        System.out.println("Ponto B: "+pontoB[0]+", "+pontoB[1]);
-        System.out.println("Ponto C: "+pontoC[0]+", "+pontoC[1]);
         
         //O raio é dado pela distancia do ponto A ao C
         double vetor[] = {

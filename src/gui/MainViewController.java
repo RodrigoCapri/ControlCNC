@@ -66,6 +66,8 @@ public class MainViewController  implements Initializable{
     @FXML
     public void onMenuItemIniciarAction(){
         
+        //Inicia uma conexão com Arduino
+        //E imprime na tela algum arquivo gcode que já esteja aberto
         this.loadView("/gui/iniciar/IniciarView.fxml", x -> {
             this.drawGCode();
         });
@@ -75,6 +77,8 @@ public class MainViewController  implements Initializable{
     @FXML
     public void onMenuItemAbrirAction(){
         
+        //Abrir um arquivo gcode e imprimir na tela
+        //Sem iniciar uma conexão com Arduino
         ArquivoGCode.openFile();
         
         this.loadView("/gui/iniciar/IniciarView.fxml", x -> {
@@ -86,6 +90,7 @@ public class MainViewController  implements Initializable{
     @FXML
     public void onMenuItemFecharAction(){
         
+        //Se algum arquivo estiver aberto ele fecha o arquivo e repinta a tela
         if(ArquivoGCode.isFileOpen()){
             
             ArquivoGCode.closeFile();

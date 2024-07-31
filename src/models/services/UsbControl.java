@@ -68,7 +68,7 @@ public class UsbControl {
                         if(bufferRead.ready()){
                             
                            String data = bufferRead.readLine();
-                           readEvent.readEvent(""+data);
+                           readEvent.readEvent(data);
                            
                         }
                         
@@ -111,6 +111,8 @@ public class UsbControl {
                 outStream.close();
                 port.closePort();
                 
+                port = null;
+                
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -120,6 +122,9 @@ public class UsbControl {
         
     }
     
+    public static boolean isPortOpen(){
+        return port != null;
+    }
     
     public static List<String> getListPort(){
         
