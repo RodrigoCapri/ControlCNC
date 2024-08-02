@@ -168,6 +168,10 @@ public class ArquivoGCode {
         return path_file.getAbsolutePath();
     }
     
+    public static String getNameFile(){
+        return path_file.getName();
+    }
+    
     public static String getLinhaComando(int i){
         return linhas_comando.get(i);
     }

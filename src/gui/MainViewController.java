@@ -3,9 +3,6 @@ package gui;
 
 import application.Main;
 import dist.gcode.ArquivoGCode;
-import dist.process.Arco;
-import dist.process.AtualPoint;
-import dist.process.Reta;
 import gui.utils.Alerts;
 import java.io.IOException;
 import java.net.URL;
@@ -21,7 +18,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,12 +35,6 @@ public class MainViewController  implements Initializable{
     
     @FXML
     private MenuItem menuItemIniciar;
-    
-    @FXML
-    private MenuItem menuItemAbrir;
-    
-    @FXML
-    private MenuItem menuItemFechar;
     
     public MainViewController(){
     }
@@ -66,94 +56,12 @@ public class MainViewController  implements Initializable{
     @FXML
     public void onMenuItemIniciarAction(){
         
-        //Inicia uma conexão com Arduino
-        //E imprime na tela algum arquivo gcode que já esteja aberto
-        this.loadView("/gui/iniciar/IniciarView.fxml", x -> {
-            this.drawGCode();
-        });
-        
-    }
-    
-    @FXML
-    public void onMenuItemAbrirAction(){
-        
-        //Abrir um arquivo gcode e imprimir na tela
-        //Sem iniciar uma conexão com Arduino
-        ArquivoGCode.openFile();
-        
-        this.loadView("/gui/iniciar/IniciarView.fxml", x -> {
-            this.drawGCode();
-        });
-        
-    }
-    
-    @FXML
-    public void onMenuItemFecharAction(){
-        
-        //Se algum arquivo estiver aberto ele fecha o arquivo e repinta a tela
-        if(ArquivoGCode.isFileOpen()){
-            
-            ArquivoGCode.closeFile();
-            this.loadView("/gui/iniciar/IniciarView.fxml", x -> {});
-            
-        }
+        this.loadView("/gui/iniciar/IniciarView.fxml", x -> {});
         
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-    }
-    
-    private void drawGCode(){
-        
-        if(ArquivoGCode.isFileOpen()){
-            
-            for(String cmd : ArquivoGCode.getLinhasComando()){
-                
-                double x1;
-                double y1;
-                double i;
-                double j;
-                int comand_g= (ArquivoGCode.charExist(cmd, 'G')) ? ArquivoGCode.getValueInt(cmd, 'G'):0;
-                switch (comand_g) {
-                    case 0:
-                        //Movimento rapido
-                        x1 = (ArquivoGCode.charExist(cmd, 'X')) ? ArquivoGCode.getValueDouble(cmd, 'X'):AtualPoint.getX();
-                        y1 = (ArquivoGCode.charExist(cmd, 'Y')) ? ArquivoGCode.getValueDouble(cmd, 'Y'):AtualPoint.getY();
-                        Reta.drawReta(x1, y1, 1, Color.CYAN);
-                        break;
-                    case 1:
-                        //Movimento preciso
-                        x1 = (ArquivoGCode.charExist(cmd, 'X')) ? ArquivoGCode.getValueDouble(cmd, 'X'):AtualPoint.getX();
-                        y1 = (ArquivoGCode.charExist(cmd, 'Y')) ? ArquivoGCode.getValueDouble(cmd, 'Y'):AtualPoint.getY();
-                        Reta.drawReta(x1, y1, 1, Color.LAWNGREEN);
-                        break;
-                    case 2:
-                        //Arco sentido horário
-                        x1 = (ArquivoGCode.charExist(cmd, 'X')) ? ArquivoGCode.getValueDouble(cmd, 'X'):AtualPoint.getX();
-                        y1 = (ArquivoGCode.charExist(cmd, 'Y')) ? ArquivoGCode.getValueDouble(cmd, 'Y'):AtualPoint.getY();
-                        i = (ArquivoGCode.charExist(cmd, 'I')) ? ArquivoGCode.getValueDouble(cmd, 'I'):0;
-                        j = (ArquivoGCode.charExist(cmd, 'J')) ? ArquivoGCode.getValueDouble(cmd, 'J'):0;
-                        Arco.drawArc(x1, y1, i, j, Arco.HORARIO);
-                        break;
-                    case 3:
-                        //Arco sentido anti-horário
-                        x1 = (ArquivoGCode.charExist(cmd, 'X')) ? ArquivoGCode.getValueDouble(cmd, 'X'):AtualPoint.getX();
-                        y1 = (ArquivoGCode.charExist(cmd, 'Y')) ? ArquivoGCode.getValueDouble(cmd, 'Y'):AtualPoint.getY();
-                        i = (ArquivoGCode.charExist(cmd, 'I')) ? ArquivoGCode.getValueDouble(cmd, 'I'):0;
-                        j = (ArquivoGCode.charExist(cmd, 'J')) ? ArquivoGCode.getValueDouble(cmd, 'J'):0;
-                        Arco.drawArc(x1, y1, i, j, Arco.ANTI_HORARIO);
-                        break;
-                    case 92: // Zera as coordenadas sem mover os eixos
-                        AtualPoint.setPontoAtual(0, 0);
-                        break;
-                }
-            }
-            
-            AtualPoint.zararEixos();
-            
-        }
         
     }
     

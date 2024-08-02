@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/rodri/Documents/NetBeansProjects/ControlCNC/src/gui/iniciar/IniciarViewController.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/ControlCNC/src/gui/MainViewController.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/ControlCNC/src/models/DB/ArquivoDB.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/ControlCNC/src/models/services/UsbControl.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/ControlCNC/src/dist/gcode/ArquivoGCode.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/ControlCNC/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/ControlCNC/src/gui/maquina/ViewConfigController.java</file>
         </group>
     </open-files>
 </project-private>

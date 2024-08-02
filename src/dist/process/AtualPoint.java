@@ -75,4 +75,5 @@ public class AtualPoint {
     public static double getY(){
         return AtualPoint.y;
     }
+    
 }
