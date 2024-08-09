@@ -152,7 +152,7 @@ public class UsbControl {
         return nomes;
     }
     
-    public static Set< Entry<String, String> > getPortasCom(){
+    public static Map<String, String> getPortasCom(){
         
         Map<String, String> map = new HashMap<>();
         
@@ -162,6 +162,6 @@ public class UsbControl {
             map.put(porta.getDescriptivePortName(), porta.getPortDescription());
         }
         
-        return map.entrySet();
+        return map;
     }
 }

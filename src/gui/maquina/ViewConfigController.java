@@ -8,8 +8,10 @@ import application.Main;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -72,6 +74,61 @@ public class ViewConfigController implements Initializable{
     }
     
     
+    public void onBtSalvarAction(){
+        
+        btSalvar.setDisable(true);
+        btCancelar.setDisable(true);
+        btEditar.setDisable(false);
+        
+        String nameP = cbPortasComm.getSelectionModel().getSelectedItem();
+        String com = lbPortaCom.getText();
+        
+        Map<String, String> map = new HashMap<>();
+        map.put(nameP, com);
+        
+        Config config = new Config();
+        
+        this.setEditableComponents(false);
+        
+    }
+    
+    public void onBtEditarAction(){
+        
+        btSalvar.setDisable(false);
+        btCancelar.setDisable(false);
+        btEditar.setDisable(true);
+        
+        
+        
+        this.setEditableComponents(true);
+        
+    }
+    
+    public void onBtCancelarAction(){
+        
+        btSalvar.setDisable(true);
+        btCancelar.setDisable(true);
+        btEditar.setDisable(false);
+        
+        
+        this.setEditableComponents(false);
+        
+    }
+    
+    private void setEditableComponents(boolean status){
+        
+        cbPortasComm.setDisable(!status);
+        cbBaunds.setDisable(!status);
+        cbMotorMode.setDisable(!status);
+        
+        tfMotorX.setDisable(!status);
+        tfMotorY.setDisable(!status);
+        tfMotorZ.setDisable(!status);
+        tfServoIncrement.setDisable(!status);
+        tfServoMax.setDisable(!status);
+        tfServoMin.setDisable(!status);
+        
+    }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,9 +141,9 @@ public class ViewConfigController implements Initializable{
         cbBaunds.setValue(config.getBaunds());
         
         //Carrega a lista de portas comm disponiveis no ComboBox
-        Set<Entry<String, String>> set = UsbControl.getPortasCom();
+        Map<String, String> map = UsbControl.getPortasCom();
         List<String> list = new ArrayList<>();
-        for (Entry<String, String> entry : set) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             list.add(entry.getKey());
         }
         obsListPortasComm = FXCollections.observableArrayList(list);
@@ -106,6 +163,13 @@ public class ViewConfigController implements Initializable{
         tfServoMax.setText( String.format("%.2f", config.getServoPosMax()) );
         tfServoMin.setText( String.format("%.2f", config.getServoPosMin()) );
         tfServoIncrement.setText( String.format("%.2f", config.getServoIncrement()) );
+        
+        //Desabilita os componentes necessários
+        btSalvar.setDisable(true);
+        btCancelar.setDisable(true);
+        btEditar.setDisable(false);
+        
+        this.setEditableComponents(false);
         
     }
     

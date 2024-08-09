@@ -164,9 +164,9 @@
             </GridPane>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <Button fx:id="btSalvar" mnemonicParsing="false" text="Salvar" />
-                  <Button fx:id="btEditar" mnemonicParsing="false" text="Editar" />
-                  <Button fx:id="btCancelar" mnemonicParsing="false" text="Cancelar" />
+                  <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#onBtSalvarAction" text="Salvar" />
+                  <Button fx:id="btEditar" mnemonicParsing="false" onAction="#onBtEditarAction" text="Editar" />
+                  <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelarAction" text="Cancelar" />
                </children>
             </HBox>
          </children>
