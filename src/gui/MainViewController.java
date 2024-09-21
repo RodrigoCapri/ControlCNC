@@ -2,7 +2,6 @@
 package gui;
 
 import application.Main;
-import dist.gcode.ArquivoGCode;
 import gui.utils.Alerts;
 import java.io.IOException;
 import java.net.URL;

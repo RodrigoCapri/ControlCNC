@@ -69,24 +69,52 @@ public class ViewConfigController implements Initializable{
     @FXML
     private Button btCancelar;
     
+    private Map<String, String> map;
+    
     public ViewConfigController(){
-        Locale.setDefault(Locale.US);
+        
     }
-    
-    
     public void onBtSalvarAction(){
         
         btSalvar.setDisable(true);
         btCancelar.setDisable(true);
         btEditar.setDisable(false);
         
+        //Nova instancia de configuração
+        Config config = new Config();
+  
+        //Seta a porta COM (Nome do dispositivo, nome da porta)
         String nameP = cbPortasComm.getSelectionModel().getSelectedItem();
         String com = lbPortaCom.getText();
+        Entry<String, String> entry = new HashMap.SimpleEntry<>(nameP , com);
+        config.setPortaComm(entry);
         
-        Map<String, String> map = new HashMap<>();
-        map.put(nameP, com);
+        //Seta os baunds
+        int baunds = cbBaunds.getSelectionModel().getSelectedItem();
+        config.setBaunds(baunds);
         
-        Config config = new Config();
+        //Seta o motor mode
+        int motorMode = cbMotorMode.getSelectionModel().getSelectedIndex();
+        config.setMotorMode(motorMode);
+        
+        // Steps/mm dos motores de passo
+        float stepX = Float.parseFloat(tfMotorX.getText()); //eixo X
+        config.setStepEixoX(stepX);
+        float stepY = Float.parseFloat(tfMotorY.getText()); //eixo Y
+        config.setStepEixoY(stepY);
+        float stepZ = Float.parseFloat(tfMotorZ.getText()); //eixo Z
+        config.setStepEixoZ(stepZ);
+        
+        //Configuração do servo motor
+        float posMax = Float.parseFloat(tfServoMax.getText());
+        config.setServoPosMax(posMax);
+        float posMin = Float.parseFloat(tfServoMin.getText());
+        config.setServoPosMin(posMin);
+        float incremento = Float.parseFloat(tfServoIncrement.getText());
+        config.setServoIncrement(incremento);
+        
+        //Salva as novas configurações
+        ArquivoDB.save(config, Main.getPahtConfig());
         
         this.setEditableComponents(false);
         
@@ -98,8 +126,6 @@ public class ViewConfigController implements Initializable{
         btCancelar.setDisable(false);
         btEditar.setDisable(true);
         
-        
-        
         this.setEditableComponents(true);
         
     }
@@ -110,8 +136,15 @@ public class ViewConfigController implements Initializable{
         btCancelar.setDisable(true);
         btEditar.setDisable(false);
         
-        
         this.setEditableComponents(false);
+        
+    }
+    
+    public void onCbPortasComAction(){
+        
+        String nameP = cbPortasComm.getSelectionModel().getSelectedItem();
+        
+        lbPortaCom.setText(map.get(nameP));
         
     }
     
@@ -133,6 +166,8 @@ public class ViewConfigController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
+        Locale.setDefault(Locale.US);
+        
         Config config = ArquivoDB.load(Main.getPahtConfig());
         
         //Carrega a lista de baunds no ComboBox
@@ -141,8 +176,15 @@ public class ViewConfigController implements Initializable{
         cbBaunds.setValue(config.getBaunds());
         
         //Carrega a lista de portas comm disponiveis no ComboBox
-        Map<String, String> map = UsbControl.getPortasCom();
-        List<String> list = new ArrayList<>();
+        //Map contendo o nome do dispositivo da porta e o nome da porta
+        map = UsbControl.getPortasCom();
+        
+        //Teste
+        //map.put("Teste 1", "COM99");
+        //map.put("Teste 2", "COM55");
+        
+        //Array para armazenar a lista de portas disponíveis
+        List<String> list = new ArrayList<>(); 
         for (Map.Entry<String, String> entry : map.entrySet()) {
             list.add(entry.getKey());
         }

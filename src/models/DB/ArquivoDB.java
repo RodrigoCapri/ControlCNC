@@ -57,6 +57,7 @@ public class ArquivoDB {
             }
             
         }else{
+            
             Entry<String, String> entry = new HashMap.SimpleEntry<>("Arduino Uno (COM3)","COM3");
             config = new Config(entry, 9600, 0, 200f, 200f, 200f, 80f, 60f, 1f);
             

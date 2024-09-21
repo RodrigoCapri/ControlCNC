@@ -266,7 +266,7 @@ public class IniciarViewController implements Initializable{
             initializingAction.accept(controller); //Executa os comandos passados por expressão lambda no parametro
 
         } catch (IOException e) {
-                Alerts.showAlert("IO Exception", "Error loading view!", e.getMessage(), Alert.AlertType.ERROR);
+            Alerts.showAlert("IO Exception", "Error loading view!", e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }

@@ -28,7 +28,7 @@
             <HBox spacing="10.0">
                <children>
                   <Label text="Portas" />
-                  <ComboBox fx:id="cbPortasComm" prefWidth="200.0" />
+                  <ComboBox fx:id="cbPortasComm" onAction="#onCbPortasComAction" prefWidth="200.0" />
                   <Label fx:id="lbPortaCom" />
                   <Label text="Baunds">
                      <HBox.margin>

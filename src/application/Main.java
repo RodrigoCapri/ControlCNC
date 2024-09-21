@@ -18,7 +18,7 @@ public class Main extends Application{
     
     private static Scene mainScene;
     private static Stage stage;
-    private static String pathConfig = "config.conf";
+    private static final String pathConfig = "config.conf";
     
     @Override
     public void start(Stage primaryStage) throws Exception {

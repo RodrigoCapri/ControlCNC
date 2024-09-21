@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package models.entities;
 
 import java.io.Serializable;
@@ -112,8 +109,6 @@ public class Config implements Serializable{
     public void setMotorMode(Integer motorMode) {
         this.motorMode = motorMode;
     }
-    
-    
 
     @Override
     public String toString() {

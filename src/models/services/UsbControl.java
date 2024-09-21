@@ -159,7 +159,7 @@ public class UsbControl {
         SerialPort portas[] = SerialPort.getCommPorts();
         
         for(SerialPort porta : portas){
-            map.put(porta.getDescriptivePortName(), porta.getPortDescription());
+            map.put(porta.getDescriptivePortName(), porta.getSystemPortName());
         }
         
         return map;
