@@ -13,10 +13,10 @@ import java.util.logging.Logger;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
+import gui.utils.Alerts;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -83,7 +83,7 @@ public class UsbControl {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(UsbControl.class.getName()).log(Level.SEVERE, null, ex);
+            Alerts.showAlert("Error", "Erro de thread!", ex.getMessage(), Alert.AlertType.ERROR);
         }
         
     }

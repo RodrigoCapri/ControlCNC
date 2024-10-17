@@ -15,10 +15,13 @@ public class Arco {
         double pontoC[] = { (AtualPoint.getX()+i), (AtualPoint.getY()+j) }; //Centro do arco
         
         //O raio é dado pela distancia do ponto A ao C
+        //Faz a diferença dos dois pontos
         double vetor[] = {
             (pontoC[0]-pontoA[0]),
             (pontoC[1]-pontoA[1])
         };
+        
+        //Obtém o raio fazndo o modulo do vetor resultante da diferença de dois pontos
         double raio = Math.sqrt( Math.pow(vetor[0], 2)+ Math.pow(vetor[1], 2) );
         
         //Converte a coordenada em seu respectivo grau na cricunferência
@@ -71,12 +74,14 @@ public class Arco {
         /*
             Para converter R3 em Cilindrica devemos trabalhar com a Tangente.
             Mas nesse caso trabalharemos com o Cosseno, pois assim, não teremos
-        problemas de dividir algum valor por zero.
+            problemas de dividir algum valor por zero.
         */
         
-        
         //Primeiro converte a coordenada cartesiana em cilindrica
+        //para isso, devemos calcular o módulo do vetor
         double r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        
+        //Fazemos então r|x para obter o angulo em radianos e depois converte para graus
         double grad = Math.toDegrees( Math.acos(x/r) );
         
         /*
@@ -94,11 +99,14 @@ public class Arco {
     //Passando os valores do grau, raio e coordenada central
     private static double[] toCoordenada(double grad, double raio, double[] pontoC){
         
+        //Converter o grau em radianos
         double tetha = Math.toRadians(grad);
 
+        //Pega os valores de Seno e Cosseno do angulo
         double cos = Math.cos(tetha);
         double sin = Math.sin(tetha);
 
+        //Faz cos*raio, depois soma a coordenada central
         double x = (cos * raio) + pontoC[0];
         double y = (sin * raio) + pontoC[1];
         

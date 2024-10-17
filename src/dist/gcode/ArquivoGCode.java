@@ -6,13 +6,13 @@
 package dist.gcode;
 
 import application.Main;
+import gui.utils.Alerts;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 
 /**
@@ -38,20 +38,27 @@ public class ArquivoGCode {
             linhas_comando= new ArrayList<>();
             
             try (BufferedReader buf_reader = new BufferedReader(new FileReader(path_file))) {
+                
                 while(true){
+                    
                     String linha= buf_reader.readLine();
+                    
                     if(linha != null){
+                        
                         if( !( charExist(linha, '(') || charExist(linha, ')') || charExist(linha, ';')) ){
                             linhas_comando.add(linha);
                             num_linhas++;
                         }
+                        
                     }else
                         break;
+                    
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ArquivoGCode.class.getName()).log(Level.SEVERE, null, ex);
+                Alerts.showAlert("Erro!", "Erro ao abrir o arquivo!", ex.getMessage(), Alert.AlertType.ERROR);
             }
-            return path_file.getAbsolutePath();
+            
+            return path_file.getPath();
             
         }else{
             return null;
@@ -75,7 +82,7 @@ public class ArquivoGCode {
                     break;
             }
         } catch (IOException ex) {
-            Logger.getLogger(ArquivoGCode.class.getName()).log(Level.SEVERE, null, ex);
+            Alerts.showAlert("Erro", "Erro ao abrir o arquivo!", ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
     
